@@ -1,0 +1,40 @@
+﻿{
+  "publisherId": "SLF-1234",
+  "systemId": "DU-1234",
+  "cases": [
+    {
+      "caseId": "C-DU-1234",
+      "subjectId": "kodare-1234",
+      "publisherStatus": "Godkänt",
+      "status": "approved",
+      "updateTime": "2022-10-24",
+      "displayLabel": "Kodgranskning",
+      "description": "Din kod är granskad och godkänd",
+      "events": [
+        {
+          "updateTime": "2022-10-24",
+          "label": "Merge",
+          "actions": [
+            {
+              "type": "",
+              "label": "View on GitHub",
+              "url": "http://www.example.org"
+            }
+          ]
+        },
+        {
+          "updateTime": "2022-10-24",
+          "label": "Review",
+          "description": "Kodgranskning"
+        }
+      ],
+      "actions": [
+        {
+          "type": "",
+          "label": "View on GitHub",
+          "url": "http://www.example.org"
+        }
+      ]
+    }
+  ]
+}
