@@ -13,15 +13,17 @@ public class MongoDbCasesDatabase : ICasesDatabase
         Session = session;
     }
 
+    public MongoDbCaseRecord CreateCaseRecord(CasesBundle bundle, Case c) => new MongoDbCaseRecord
+    {
+        RecordId = $"{bundle.PublisherId}:{bundle.SystemId}:{c.CaseId}",
+        SubjectId = c.SubjectId,
+        Case = c,
+        UpdateTime = DateTime.Now
+    };
+
     public void UpdateCases(CasesBundle bundle)
     {
-        var caseRecords = from c in bundle.Cases
-                          select new MongoDbCaseRecord
-                          {
-                              RecordId = $"{bundle.PublisherId}:{bundle.SystemId}:{c.CaseId}",
-                              SubjectId = c.SubjectId,
-                              Case = c
-                          };
+        var caseRecords = bundle.Cases.Select(c => CreateCaseRecord(bundle, c));
 
         Collection.BulkWrite(
             from caseRecord in caseRecords
@@ -32,4 +34,3 @@ public class MongoDbCasesDatabase : ICasesDatabase
             select writeModel);
     }
 }
-
