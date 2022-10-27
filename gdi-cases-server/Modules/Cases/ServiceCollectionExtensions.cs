@@ -8,7 +8,12 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddCasesDatabase(this IServiceCollection services)
     {
-        services.AddSingleton<ICasesDatabase>(new MongoDbCasesDatabaseFactory().TryCreateDatabaseFromEnv());
+        services.AddSingleton<ICasesDatabase>(new MongoDbCasesDatabaseFactory().TryCreateDatabaseFromEnv() ?? MissingConfiguration<ICasesDatabase>("Database configuration is missing. Expected atleast MONGODB_URI=... in environment."));
         return services;
+    }
+
+    private static T MissingConfiguration<T>(string message)
+    {
+        throw new ApplicationException(message);
     }
 }
