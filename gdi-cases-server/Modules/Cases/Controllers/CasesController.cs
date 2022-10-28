@@ -17,6 +17,7 @@ public class CasesController : Controller
     public ICasesDatabase Database { get; }
 
     [HttpGet("list-cases-by-subject", Name = "listCasesBySubjectOperation")]
+    [Authorize]
     public IEnumerable<Case> ListCasesBySubject(string subjectId) {
         return Database.ListCasesBySubject(subjectId);
     }
