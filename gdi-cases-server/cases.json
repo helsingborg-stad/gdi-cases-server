@@ -16,7 +16,6 @@
           "label": "Merge",
           "actions": [
             {
-              "type": "",
               "label": "View on GitHub",
               "url": "http://www.example.org"
             }
