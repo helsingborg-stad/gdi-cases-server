@@ -33,6 +33,13 @@ public class CaseControllerTests: NiceToHaveTestBase
     public class FakeDatabase : ICasesDatabase
     {
         public Action<CasesBundle>? OnUpdateCases { get; set; }
+
+        public IEnumerable<Case> ListCasesBySubject(string subjectId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateCases(CasesBundle bundle) => OnUpdateCases?.Invoke(bundle);
+        
     }
 }
