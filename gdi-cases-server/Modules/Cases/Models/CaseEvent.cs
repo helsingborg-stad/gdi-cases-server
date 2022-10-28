@@ -8,7 +8,7 @@ namespace gdi_cases_server.Modules.Cases.Models;
 public class CaseEvent
 {
     [Required, BsonElement("updateTime")]
-    public DateTime UpdateTime { get; set; }
+    public string UpdateTime { get; set; }
     [BsonElement("label"), Description("Display label")]
     public string Label { get; set; } = "";
     [BsonElement("description"), Description("Display description")]
