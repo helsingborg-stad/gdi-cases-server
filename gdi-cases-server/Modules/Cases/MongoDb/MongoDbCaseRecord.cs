@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace gdi_cases_server.Modules.Cases.MongoDb;
 
+[BsonIgnoreExtraElements]
 public class MongoDbCaseRecord
 {
     [BsonElement("recordId")]

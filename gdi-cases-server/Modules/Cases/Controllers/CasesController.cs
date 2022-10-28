@@ -16,6 +16,10 @@ public class CasesController : Controller
 
     public ICasesDatabase Database { get; }
 
+    [HttpGet("list-cases-by-subject", Name = "listCasesBySubjectOperation")]
+    public IEnumerable<Case> ListCasesBySubject(string subjectId) {
+        return Database.ListCasesBySubject(subjectId);
+    }
     [HttpPut("upload", Name = "uploadCasesOperation")]
     [Authorize]
     public UploadCasesResult UploadCases(CasesBundle bundle)

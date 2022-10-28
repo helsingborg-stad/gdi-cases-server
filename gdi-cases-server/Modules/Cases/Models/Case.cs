@@ -17,8 +17,8 @@ public class Case
     public string Status { get; set; } = "";
     [Required, BsonElement("updateTime"), Description("Time of update"), Range(typeof(DateTime), "1971-01-01", "3000-01-01")]
     public string UpdateTime { get; set; } = "";
-    [BsonElement("displayLabel"), Description("Display label")]
-    public string DisplayLabel { get; set; } = "";
+    [BsonElement("label"), Description("Display label")]
+    public string Label { get; set; } = "";
     [BsonElement("description"), Description("Display description")]
     public string Description { get; set; } = "";
 

@@ -21,6 +21,14 @@ public class MongoDbCasesDatabase : ICasesDatabase
         UpdateTime = DateTime.Now
     };
 
+    public IEnumerable<Case> ListCasesBySubject(string subjectId)
+    {
+        return (
+            from record in Collection.Find<MongoDbCaseRecord>(record => record.SubjectId == subjectId).ToEnumerable<MongoDbCaseRecord>()
+            select record.Case)
+               .ToList();
+    }
+
     public void UpdateCases(CasesBundle bundle)
     {
         var caseRecords = bundle.Cases.Select(c => CreateCaseRecord(bundle, c));

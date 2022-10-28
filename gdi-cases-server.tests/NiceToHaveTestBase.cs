@@ -23,7 +23,7 @@ public class NiceToHaveTestBase
         PublisherStatus = $"test-case-{seed}",
         Status = $"test-case-{seed}",
         UpdateTime = $"test-case-{seed}",
-        DisplayLabel = $"test-case-{seed}",
+        Label = $"test-case-{seed}",
         Description = $"test-case-{seed}",
         Events = Enumerable.Empty<CaseEvent>(),
         Actions = Enumerable.Empty<CaseAction>()
