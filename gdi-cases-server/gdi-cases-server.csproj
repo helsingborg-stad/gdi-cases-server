@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="dotenv.net" Version="3.1.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
     <PackageReference Include="AspNetCore.Authentication.ApiKey" Version="6.0.1" />
@@ -24,6 +24,7 @@
     <None Remove="Modules\Cases\MongoDb\" />
     <None Remove="Authentication\" />
     <None Remove="AspNetCore.Authentication.ApiKey" />
+    <None Remove="Converters\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Modules\" />
@@ -32,5 +33,6 @@
     <Folder Include="Modules\Cases\Controllers\" />
     <Folder Include="Modules\Cases\MongoDb\" />
     <Folder Include="Authentication\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>

@@ -20,7 +20,7 @@ public class NiceToHaveTestBase
     {
         CaseId = $"test-case-{seed}",
         SubjectId = $"test-case-{seed}",
-        PublisherStatus = $"test-case-{seed}",
+        //PublisherStatus = $"test-case-{seed}",
         Status = $"test-case-{seed}",
         UpdateTime = $"test-case-{seed}",
         Label = $"test-case-{seed}",

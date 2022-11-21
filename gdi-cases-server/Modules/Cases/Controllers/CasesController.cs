@@ -16,11 +16,22 @@ public class CasesController : Controller
 
     public ICasesDatabase Database { get; }
 
+    [HttpGet("get-constants", Name = "getConstantsOperation")]
+    public ConstantsResult Constants()
+    {
+        return new ConstantsResult
+        {
+            StatusHints = Enum.GetNames<StatusHint>().Select(s => s.ToLower()),
+            TypeHints = Enum.GetNames<ActionTypeHint>().Select(s => s.ToLower()),
+        };
+    }
+
     [HttpGet("list-cases-by-subject", Name = "listCasesBySubjectOperation")]
     [Authorize]
     public IEnumerable<Case> ListCasesBySubject(string subjectId) {
         return Database.ListCasesBySubject(subjectId);
     }
+
     [HttpPut("upload", Name = "uploadCasesOperation")]
     [Authorize]
     public UploadCasesResult UploadCases(CasesBundle bundle)
