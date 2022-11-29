@@ -6,13 +6,13 @@ namespace gdi_cases_server.Modules.Cases.Models;
 
 public enum StatusHint
 {
-    [Description("The case should be displayed as approved (closed with some outcome or action")]
+    [Description("The case should be displayed as approved and open")]
     Approved,
-    [Description("The case should be displayed as rejected (closed without outcome or action)")]
+    [Description("The case should be displayed as rejected and open")]
     Rejected,
     [Description("The case should be displayed as closed")]
-    Closed,
+    Closed = 3,
     [Description("The case needs further refinement from the subject/applicant")]
-    Incomplete
+    Incomplete = 4
 }
 
