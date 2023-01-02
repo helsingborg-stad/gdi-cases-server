@@ -54,8 +54,6 @@ public class SampleCasesController: Controller {
     {
         return new CasesBundle
         {
-            PublisherId = "gdi-cases-server",
-            SystemId = "samples",
             Cases = GenerateSampleCases(subjectId, new Random(randomSeed))
         };
     }
@@ -86,6 +84,8 @@ public class SampleCasesController: Controller {
                             .ToList()
                select new Case
                {
+                   PublisherId = "gdi-cases-server",
+                   SystemId = "samples",
                    CaseId = $"case-{random.Next(1001, 9999)}",
                    SubjectId = subjectId,
                    // PublisherStatus = status,

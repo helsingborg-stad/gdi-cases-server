@@ -15,7 +15,7 @@ public class MongoDbCasesDatabase : ICasesDatabase
 
     public MongoDbCaseRecord CreateCaseRecord(CasesBundle bundle, Case c) => new MongoDbCaseRecord
     {
-        RecordId = $"{bundle.PublisherId}:{bundle.SystemId}:{c.CaseId}",
+        RecordId = $"{c.PublisherId}:{c.SystemId}:{c.CaseId}",
         SubjectId = c.SubjectId,
         Case = c,
         UpdateTime = DateTime.Now
@@ -31,8 +31,16 @@ public class MongoDbCasesDatabase : ICasesDatabase
 
     public void UpdateCases(CasesBundle bundle)
     {
-        var caseRecords = bundle.Cases.Select(c => CreateCaseRecord(bundle, c));
-
+        Collection.BulkWrite(
+            from c in bundle.Cases
+            let record = CreateCaseRecord(bundle, c)
+            let filter = Builders<MongoDbCaseRecord>.Filter.Where(rec => rec.RecordId == record.RecordId)
+            let writeModel = c.IsDeleted
+                ? new DeleteOneModel<MongoDbCaseRecord>(filter) as WriteModel<MongoDbCaseRecord>
+                : new ReplaceOneModel<MongoDbCaseRecord>(filter, record) { IsUpsert = true }
+            select writeModel
+            );
+        /*
         Collection.BulkWrite(
             from caseRecord in caseRecords
             let writeModel = new ReplaceOneModel<MongoDbCaseRecord>(
@@ -40,5 +48,6 @@ public class MongoDbCasesDatabase : ICasesDatabase
                 caseRecord)
             { IsUpsert = true }
             select writeModel);
+        */
     }
 }

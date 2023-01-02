@@ -10,7 +10,13 @@ namespace gdi_cases_server.Modules.Cases.Models;
 [Description("A case")]
 public class Case
 {
-    [Required, BsonElement("caseId"), StringLength(maximumLength: 24, MinimumLength = 8), Description("System specific Id of event")]
+    [Required, BsonElement("publisherId"), StringLength(maximumLength: 128, MinimumLength = 3), Description("Publisher Id. Usually an organisation or self governed unit.")]
+    public string PublisherId { get; set; } = "";
+
+    [Required, BsonElement("systemId"), StringLength(maximumLength: 128, MinimumLength = 3), Description("Distingushing Id of internal source of events within publisher")]
+    public string SystemId { get; set; } = "";
+
+    [Required, BsonElement("caseId"), StringLength(maximumLength: 128, MinimumLength = 8), Description("System specific Id of event")]
     public string CaseId { get; set; } = "";
 
     [Required, BsonElement("subjectId"), Description("Subject of event. Usually a person")]
@@ -42,5 +48,8 @@ public class Case
 
     [BsonElement("actions")]
     public IEnumerable<CaseAction>? Actions { get; set; } = Enumerable.Empty<CaseAction>();
+
+    [BsonIgnore, Description("Deleted flag")]
+    public bool IsDeleted { get; set; } = false;
 }
 

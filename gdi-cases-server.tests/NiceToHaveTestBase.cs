@@ -8,25 +8,30 @@ public class NiceToHaveTestBase
     {
         return new CasesBundle
         {
-            PublisherId = "test-publisher",
-            SystemId = "test-systemid",
             Cases = Enumerable.Range(0, casesCount).Select(i => CreateTestCase(i))
         };
 
 
     }
+
     // Create a simple testcase
     public Case CreateTestCase(int seed) => new Case()
     {
+        PublisherId = "test-publisher",
+        SystemId = "test-systemid",
         CaseId = $"test-case-{seed}",
-        SubjectId = $"test-case-{seed}",
-        //PublisherStatus = $"test-case-{seed}",
-        Status = $"test-case-{seed}",
-        UpdateTime = $"test-case-{seed}",
-        Label = $"test-case-{seed}",
-        Description = $"test-case-{seed}",
+        SubjectId = $"test-subject-{seed}",
+        Status = $"test-status-{seed}",
+        UpdateTime = FormatDate(DateTime.Now),
+        Label = $"test-label-{seed}",
+        Description = $"test-description-{seed}",
         Events = Enumerable.Empty<CaseEvent>(),
         Actions = Enumerable.Empty<CaseAction>()
     };
+
+    private static string FormatDate(DateTime date)
+    {
+        return date.ToString("yyyy-MM-dd");
+    }
 
 }
