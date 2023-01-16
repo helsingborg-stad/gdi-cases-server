@@ -1,21 +1,22 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
+using gdi_cases_server.Modules.Cases.Models.Json;
 
 namespace gdi_cases_server.tests;
 
 public class NiceToHaveTestBase
 {
-    public CasesBundle CreateTestCaseBundle(int casesCount = 2)
+    public CasesBundleJsonDto CreateTestCaseBundle(int casesCount = 2)
     {
-        return new CasesBundle
+        return new CasesBundleJsonDto
         {
-            Cases = Enumerable.Range(0, casesCount).Select(i => CreateTestCase(i))
+            Cases = Enumerable.Range(0, casesCount).Select(i => CreateTestCase(i)).ToList()
         };
 
 
     }
 
     // Create a simple testcase
-    public Case CreateTestCase(int seed) => new Case()
+    public CaseJsonDto CreateTestCase(int seed) => new CaseJsonDto()
     {
         PublisherId = "test-publisher",
         SystemId = "test-systemid",
@@ -25,8 +26,6 @@ public class NiceToHaveTestBase
         UpdateTime = FormatDate(DateTime.Now),
         Label = $"test-label-{seed}",
         Description = $"test-description-{seed}",
-        Events = Enumerable.Empty<CaseEvent>(),
-        Actions = Enumerable.Empty<CaseAction>()
     };
 
     private static string FormatDate(DateTime date)

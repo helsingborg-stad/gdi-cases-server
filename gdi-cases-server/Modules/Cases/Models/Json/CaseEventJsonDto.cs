@@ -3,11 +3,13 @@ using System.ComponentModel.DataAnnotations;
 using gdi_cases_server.Converters;
 using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Runtime.Serialization;
+using System.Xml.Linq;
 
-namespace gdi_cases_server.Modules.Cases.Models;
+namespace gdi_cases_server.Modules.Cases.Models.Json;
 
 [Description("A description of a milestone in a case process")]
-public class CaseEvent
+public class CaseEventJsonDto
 {
     [Required, BsonElement("updateTime")]
     public string UpdateTime { get; set; } = "";
@@ -21,15 +23,11 @@ public class CaseEvent
     [BsonElement("status"), Description("Display status")]
     public string? Status { get; set; } = "";
 
-    /*
-    [BsonElement("statusHint"), Description("Status hint")]
-    public StatusHint StatusHint { get; set; } = StatusHint.Unknown;
-    */
     [BsonElement("statusHint"), Description("Status hint")]
     [JsonConverter(typeof(StringValuesFromEnumConverter<StatusHint>))]
     public string? StatusHint { get; set; } = "";
 
     [BsonElement("actions")]
-    public IEnumerable<CaseAction>? Actions { get; set; } = Enumerable.Empty<CaseAction>();
+    public List<CaseActionJsonDto>? Actions { get; set; } = new List<CaseActionJsonDto>();
 }
 

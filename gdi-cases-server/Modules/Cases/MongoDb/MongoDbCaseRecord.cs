@@ -1,4 +1,5 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
+using gdi_cases_server.Modules.Cases.Models.Json;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace gdi_cases_server.Modules.Cases.MongoDb;
@@ -15,6 +16,6 @@ public class MongoDbCaseRecord
     [BsonElement("updateTime")]
     public DateTime UpdateTime { get; set; } = DateTime.Now;
     [BsonElement("case")]
-    public Case? Case { get; set; }
+    public CaseJsonDto? Case { get; set; }
 }
 

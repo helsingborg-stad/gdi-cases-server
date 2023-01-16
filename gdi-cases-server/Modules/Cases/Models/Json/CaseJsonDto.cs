@@ -1,14 +1,14 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using gdi_cases_server.Converters;
 using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace gdi_cases_server.Modules.Cases.Models;
+namespace gdi_cases_server.Modules.Cases.Models.Json;
 
 [Description("A case")]
-public class Case
+public class CaseJsonDto
 {
     [Required, BsonElement("publisherId"), StringLength(maximumLength: 128, MinimumLength = 3), Description("Publisher Id. Usually an organisation or self governed unit.")]
     public string PublisherId { get; set; } = "";
@@ -34,22 +34,16 @@ public class Case
     [BsonElement("status"), Description("Display status")]
     public string? Status { get; set; } = "";
 
-    /*
-    [BsonElement("statusHint"), Description("Status hint")]
-    [JsonConverter(typeof(RelaxedEnumConverter<StatusHint>))]
-    public StatusHint StatusHint { get; set; } = StatusHint.Unknown;
-    */
     [BsonElement("statusHint"), Description("Status hint")]
     [JsonConverter(typeof(StringValuesFromEnumConverter<StatusHint>))]
     public string? StatusHint { get; set; } = "";
 
     [BsonElement("events")]
-    public IEnumerable<CaseEvent>? Events { get; set; } = Enumerable.Empty<CaseEvent>();
+    public List<CaseEventJsonDto>? Events { get; set; } = new List<CaseEventJsonDto>();
 
     [BsonElement("actions")]
-    public IEnumerable<CaseAction>? Actions { get; set; } = Enumerable.Empty<CaseAction>();
+    public List<CaseActionJsonDto>? Actions { get; set; } = new List<CaseActionJsonDto>();
 
     [BsonIgnore, Description("Deleted flag")]
     public bool IsDeleted { get; set; } = false;
 }
-

@@ -1,4 +1,5 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
+using gdi_cases_server.Modules.Cases.Models.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,17 +27,26 @@ public class CasesController : Controller
         };
     }
 
-    [HttpGet("list-cases-by-subject", Name = "listCasesBySubjectOperation")]
     [Authorize]
-    public IEnumerable<Case> ListCasesBySubject(string subjectId) {
+    [HttpGet("list-cases-by-subject", Name = "listCasesBySubjectOperation")]
+    [Produces("text/json", "application/json")]
+    public IEnumerable<CaseJsonDto> ListCasesBySubject(string subjectId) {
         return Database.ListCasesBySubject(subjectId);
     }
 
-    [HttpPut("upload", Name = "uploadCasesOperation")]
     [Authorize]
-    public UploadCasesResult UploadCases(CasesBundle bundle)
+    [HttpPut("upload", Name = "uploadCasesOperation")]
+    [Consumes("text/json", "application/json")]
+    [Produces("text/json", "application/json")]
+    public UploadCasesResult UploadCases(CasesBundleJsonDto bundle)
     {
         Database.UpdateCases(bundle);
         return new UploadCasesResult();
+    }
+
+    [HttpGet("generate-sample-bundle", Name = "generateSampleBundleOperation")]
+    public CasesBundleJsonDto GenerateSampleBundle(string subjectId, int randomSeed = 0)
+    {
+        return new SampleDataGenerator().GenerateSampleBundle(subjectId, randomSeed);
     }
 }
