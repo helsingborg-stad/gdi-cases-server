@@ -8,7 +8,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace gdi_cases_server.Modules.Cases.Models.Json;
 
 [Description("A case")]
-public class CaseJsonDto
+public class Case
 {
     [Required, BsonElement("publisherId"), StringLength(maximumLength: 128, MinimumLength = 3), Description("Publisher Id. Usually an organisation or self governed unit.")]
     public string PublisherId { get; set; } = "";
@@ -39,10 +39,10 @@ public class CaseJsonDto
     public string? StatusHint { get; set; } = "";
 
     [BsonElement("events")]
-    public List<CaseEventJsonDto>? Events { get; set; } = new List<CaseEventJsonDto>();
+    public List<Event>? Events { get; set; } = new List<Event>();
 
     [BsonElement("actions")]
-    public List<CaseActionJsonDto>? Actions { get; set; } = new List<CaseActionJsonDto>();
+    public List<Action>? Actions { get; set; } = new List<Action>();
 
     [BsonIgnore, Description("Deleted flag")]
     public bool IsDeleted { get; set; } = false;

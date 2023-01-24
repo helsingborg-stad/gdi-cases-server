@@ -3,8 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace gdi_cases_server.Modules.Cases.Models.Json;
 
-public class CasesBundleJsonDto
+public class Bundle
 {
     [BsonElement("cases")]
-    public List<CaseJsonDto>? Cases { get; set; } = new List<CaseJsonDto>();
+    public List<Case>? Cases { get; set; } = new List<Case>();
 }

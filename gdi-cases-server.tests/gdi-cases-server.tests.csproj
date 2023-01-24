@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>gdi_cases_server.tests</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -17,6 +17,9 @@
 <PrivateAssets>all</PrivateAssets>
 </PackageReference>
     <PackageReference Include="DeepEqual" Version="4.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.2" />
+    <PackageReference Include="Moq" Version="4.18.4" />
+    <PackageReference Include="Flurl.Http" Version="3.2.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +28,11 @@
   <ItemGroup>
     <None Remove="DeepEqual" />
     <None Remove="Models\" />
+    <None Remove="Microsoft.AspNetCore.Mvc.Testing" />
+    <None Remove="Moq" />
+    <None Remove="Pathoschild.Http.FluentClient" />
+    <None Remove="FluentlyHttpClient" />
+    <None Remove="Flurl.Http" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

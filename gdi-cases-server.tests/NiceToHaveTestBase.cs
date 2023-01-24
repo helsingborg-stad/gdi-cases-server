@@ -5,9 +5,9 @@ namespace gdi_cases_server.tests;
 
 public class NiceToHaveTestBase
 {
-    public CasesBundleJsonDto CreateTestCaseBundle(int casesCount = 2)
+    public Bundle CreateTestCaseBundle(int casesCount = 2)
     {
-        return new CasesBundleJsonDto
+        return new Bundle
         {
             Cases = Enumerable.Range(0, casesCount).Select(i => CreateTestCase(i)).ToList()
         };
@@ -16,7 +16,7 @@ public class NiceToHaveTestBase
     }
 
     // Create a simple testcase
-    public CaseJsonDto CreateTestCase(int seed) => new CaseJsonDto()
+    public Case CreateTestCase(int seed) => new Case()
     {
         PublisherId = "test-publisher",
         SystemId = "test-systemid",

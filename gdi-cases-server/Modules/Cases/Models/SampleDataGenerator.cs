@@ -47,15 +47,15 @@ namespace gdi_cases_server.Modules.Cases.Models
                 ).ToArray();
         }
 
-        public CasesBundleJsonDto GenerateSampleBundle(string subjectId, int randomSeed = 0)
+        public Bundle GenerateSampleBundle(string subjectId, int randomSeed = 0)
         {
-            return new CasesBundleJsonDto
+            return new Bundle
             {
                 Cases = GenerateSampleCases(subjectId, new Random(randomSeed)).ToList()
             };
         }
 
-        private IEnumerable<CaseJsonDto> GenerateSampleCases(string subjectId, Random random)
+        private IEnumerable<Case> GenerateSampleCases(string subjectId, Random random)
         {
             var beginningOfTime = DateTime.Now.AddYears(-2);
             return from caseDate in GetRandomTimes(random, MinCases, MaxCases, beginningOfTime, DateTime.Now)
@@ -63,7 +63,7 @@ namespace gdi_cases_server.Modules.Cases.Models
 
                    let events = (from eventDate in GetRandomTimes(random, MinEvents, MaxEvents, beginningOfTime, caseDate)
                                  let statusHint = GetRandomElement(StatusHintDistribution, random) ?? ""
-                                 select new CaseEventJsonDto
+                                 select new Event
                                  {
                                      UpdateTime = FormatDate(eventDate),
                                      Label = $"Handläggarens notering {FormatDate(eventDate)}",
@@ -71,15 +71,15 @@ namespace gdi_cases_server.Modules.Cases.Models
                                      StatusHint = statusHint,
                                      Status = statusHint,
                                      Actions = (from i in Enumerable.Range(0, random.Next(2))
-                                               select new CaseActionJsonDto
+                                               select new Json.Action
                                                {
                                                    Label = $"E-tjänst {i}",
                                                    Url = "https://www.example.com",
                                                    TypeHint = ActionTypeHint.link.ToString()
-                                               }).ToList()
+                                               }).ToList<Json.Action>()
                                  })
-                                .ToList()
-                   select new CaseJsonDto
+                                .ToList<Event>()
+                   select new Case
                    {
                        PublisherId = "gdi-cases-server",
                        SystemId = "samples",
@@ -93,12 +93,12 @@ namespace gdi_cases_server.Modules.Cases.Models
                        Description = label,
                        Events = events,
                        Actions = (from i in Enumerable.Range(0, random.Next(2))
-                                 select new CaseActionJsonDto
+                                 select new Json.Action
                                  {
                                      Label = $"Visa i E-tjänsten ({i + 1})",
                                      Url = "https://www.example.com",
                                      TypeHint = ActionTypeHint.link.ToString()
-                                 }).ToList()
+                                 }).ToList<Json.Action>()
                    };
         }
 

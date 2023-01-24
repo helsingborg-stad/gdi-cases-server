@@ -6,7 +6,7 @@ using gdi_cases_server.Modules.Cases.Models.Json;
 namespace gdi_cases_server.tests.Models;
 
 public class ModelTestBase {
-    public static CasesBundleJsonDto GenerateSampleBundle(string subject = "test-subject", int randomSeed = 0) => new SampleDataGenerator().GenerateSampleBundle(subject, randomSeed);
+    public static Bundle GenerateSampleBundle(string subject = "test-subject", int randomSeed = 0) => new SampleDataGenerator().GenerateSampleBundle(subject, randomSeed);
 
     public static T? FromXml<T>(string text) where T : class
     {

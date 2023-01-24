@@ -6,6 +6,7 @@ namespace gdi_cases_server.Modules.Cases;
 
 public static class ServiceCollectionExtensions
 {
+    /*
     public static IServiceCollection AddCasesDatabase(this IServiceCollection services)
     {
         services.AddSingleton<ICasesDatabase>(new MongoDbCasesDatabaseFactory().TryCreateDatabaseFromEnv() ?? MissingConfiguration<ICasesDatabase>("Database configuration is missing. Expected atleast MONGODB_URI=... in environment."));
@@ -16,4 +17,5 @@ public static class ServiceCollectionExtensions
     {
         throw new ApplicationException(message);
     }
+    */
 }

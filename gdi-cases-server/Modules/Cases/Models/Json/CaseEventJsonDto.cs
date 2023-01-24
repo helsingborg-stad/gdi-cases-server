@@ -9,7 +9,7 @@ using System.Xml.Linq;
 namespace gdi_cases_server.Modules.Cases.Models.Json;
 
 [Description("A description of a milestone in a case process")]
-public class CaseEventJsonDto
+public class Event
 {
     [Required, BsonElement("updateTime")]
     public string UpdateTime { get; set; } = "";
@@ -28,6 +28,6 @@ public class CaseEventJsonDto
     public string? StatusHint { get; set; } = "";
 
     [BsonElement("actions")]
-    public List<CaseActionJsonDto>? Actions { get; set; } = new List<CaseActionJsonDto>();
+    public List<Action>? Actions { get; set; } = new List<Action>();
 }
 

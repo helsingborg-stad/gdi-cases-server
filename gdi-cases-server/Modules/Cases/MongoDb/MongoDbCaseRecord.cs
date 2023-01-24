@@ -16,6 +16,6 @@ public class MongoDbCaseRecord
     [BsonElement("updateTime")]
     public DateTime UpdateTime { get; set; } = DateTime.Now;
     [BsonElement("case")]
-    public CaseJsonDto? Case { get; set; }
+    public Case? Case { get; set; }
 }
 

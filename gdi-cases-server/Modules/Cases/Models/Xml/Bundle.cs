@@ -14,11 +14,13 @@ namespace gdi_cases_server.Modules.Cases.Models.Xml;
 /// </summary>
 // [DataContract(Name = "Bundle")] - DOES NOT DEFINE ROOT ELEMENT NAME
 // [XmlRoot(ElementName = "Bundle")] - DOES NOT DEFINE ROOT ELEMENT NAME
-[DataContract]
-[XmlRoot]
-public class Bundle
+//[DataContract]
+//[XmlRoot]
+//[XmlRoot(ElementName = "Bundle")]
+//[DataContract()]
+public class CasesBundleXmlDto
 {
-    [DataMember]
+    //[DataMember]
     public List<CaseXmlDto>? Cases { get; set; } = new List<CaseXmlDto>();
 }
 

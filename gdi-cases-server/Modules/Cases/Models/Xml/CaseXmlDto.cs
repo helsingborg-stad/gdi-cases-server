@@ -8,53 +8,53 @@ using System.Text.Json.Serialization;
 namespace gdi_cases_server.Modules.Cases.Models.Xml;
 
 [Description("A case")]
-[DataContract(Name = "Case")]
+//[DataContract(Name = "Case")]
 public class CaseXmlDto
 {
     [Required, StringLength(maximumLength: 128, MinimumLength = 3), Description("Publisher Id. Usually an organisation or self governed unit.")]
-    [DataMember]
+    //[DataMember]
     public string PublisherId { get; set; } = "";
 
     [Required, StringLength(maximumLength: 128, MinimumLength = 3), Description("Distingushing Id of internal source of events within publisher")]
-    [DataMember]
+    //[DataMember]
     public string SystemId { get; set; } = "";
 
     [Required, StringLength(maximumLength: 128, MinimumLength = 3), Description("System specific Id of event")]
-    [DataMember]
+    //[DataMember]
     public string CaseId { get; set; } = "";
 
     [Required, Description("Subject of event. Usually a person")]
-    [DataMember]
+    //[DataMember]
     public string SubjectId { get; set; } = "";
 
     [Required, Description("Time of update"), Range(typeof(DateTime), "1971-01-01", "3000-01-01")]
-    [DataMember]
+    //[DataMember]
     public string UpdateTime { get; set; } = "";
 
     [Description("Display label")]
-    [DataMember]
+    //[DataMember]
     public string Label { get; set; } = "";
 
     [Description("Display description")]
-    [DataMember]
+    //[DataMember]
     public string Description { get; set; } = "";
 
     [Description("Display status")]
-    [DataMember]
+    //[DataMember]
     public string? Status { get; set; } = "";
 
     [Description("Status hint")]
-    [DataMember]
+    //[DataMember]
     public string? StatusHint { get; set; } = "";
 
-    [DataMember]
+    //[DataMember]
     public List<CaseEventXmlDto>? Events { get; set; } = new List<CaseEventXmlDto>();
 
-    [DataMember]
+    //[DataMember]
     public List<CaseActionXmlDto>? Actions { get; set; } = new List<CaseActionXmlDto>();
 
     [Description("Deleted flag")]
-    [DataMember]
+    //[DataMember]
     public bool IsDeleted { get; set; } = false;
 }
 

@@ -10,7 +10,7 @@ public class XmlSerializerTests: ModelTestBase {
     [TestMethod]
     public void XmlCanBeParsed () {
         var b = GenerateSampleBundle();
-        FromXml<Bundle>(ToXml(XmlDto.FromJsonDto(b))).ShouldDeepEqual(b);
+        FromXml<CasesBundleXmlDto>(ToXml(XmlDto.FromJsonDto(b))).ShouldDeepEqual(b);
     }
 }
 
@@ -21,6 +21,6 @@ public class JsonSerializerTests: ModelTestBase
     public void JsonCanBeParsed()
     {
         var b = GenerateSampleBundle();
-        FromJson<CasesBundleJsonDto>(ToJson(b)).ShouldDeepEqual(b);
+        FromJson<Bundle>(ToJson(b)).ShouldDeepEqual(b);
     }
 }

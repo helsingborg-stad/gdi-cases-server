@@ -9,7 +9,7 @@ using System.Xml.Linq;
 namespace gdi_cases_server.Modules.Cases.Models.Json;
 
 [Description("Actions/links to external processes")]
-public class CaseActionJsonDto
+public class Action
 {
     [Required, BsonElement("label"), Description("Display label for action")]
     public string Label { get; set; } = "";

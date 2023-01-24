@@ -6,12 +6,12 @@ namespace gdi_cases_server.Modules.Cases.Models
 {
     public static class XmlDto
 	{
-		public static Bundle FromJsonDto(CasesBundleJsonDto bundle) => new Bundle
+		public static CasesBundleXmlDto FromJsonDto(Bundle bundle) => new CasesBundleXmlDto
 			{
 				Cases = ToList(bundle.Cases, FromJsonDto)
 			};
 		
-		public static CaseXmlDto FromJsonDto(CaseJsonDto c) => new CaseXmlDto
+		public static CaseXmlDto FromJsonDto(Case c) => new CaseXmlDto
 			{
 				Actions = ToList(c.Actions, FromJsonDto),
 				Events = ToList(c.Events, FromJsonDto),
@@ -27,13 +27,13 @@ namespace gdi_cases_server.Modules.Cases.Models
 				IsDeleted = c.IsDeleted
             };
 
-        public static CaseActionXmlDto FromJsonDto(CaseActionJsonDto c) => new CaseActionXmlDto() {
+        public static CaseActionXmlDto FromJsonDto(Json.Action c) => new CaseActionXmlDto() {
 			Label = c.Label,
 			Url = c.Url,
 			TypeHint = c.TypeHint
 		};
 
-		public static CaseEventXmlDto FromJsonDto(CaseEventJsonDto c) => new CaseEventXmlDto() {
+		public static CaseEventXmlDto FromJsonDto(Event c) => new CaseEventXmlDto() {
 			Actions = ToList(c.Actions, FromJsonDto),
 			UpdateTime = c.UpdateTime,
 			Label = c.Label,

@@ -11,7 +11,7 @@ namespace gdi_cases_server.tests;
 [TestClass]
 public class SerializationTests
 {
-    public static CasesBundleJsonDto GenerateSampleBundle (string subject = "test-subject", int randomSeed = 0) => new SampleDataGenerator().GenerateSampleBundle(subject, randomSeed);
+    public static Bundle GenerateSampleBundle (string subject = "test-subject", int randomSeed = 0) => new SampleDataGenerator().GenerateSampleBundle(subject, randomSeed);
 
 
     [TestMethod]
@@ -38,7 +38,7 @@ public class SerializationTests
         // Convert from JsonDto to XmlDto and the generate XML
         var xml = ToXml(XmlDto.FromJsonDto(b));
 
-        var parsedFromXml = FromXml<Bundle>(xml);
+        var parsedFromXml = FromXml<CasesBundleXmlDto>(xml);
 
         parsedFromXml.ShouldDeepEqual(b);
     }
@@ -68,7 +68,7 @@ public class SerializationTests
         Console.WriteLine(y);
 
 
-        var x = FromXml<Bundle>("<Bundle><Cases><Case/></Cases></Bundle>");
+        var x = FromXml<CasesBundleXmlDto>("<Bundle><Cases><Case/></Cases></Bundle>");
         Console.Write(ToJson(x));
 
         // new XmlSerializer(typeof(XmlCasesBundle)).Deserialize()
