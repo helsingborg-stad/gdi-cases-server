@@ -2,6 +2,7 @@
 using gdi_cases_server.Modules.Cases;
 using gdi_cases_server.Modules.Cases.MongoDb;
 using gdi_cases_server.XmlSupport;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
 public class Startup
@@ -53,5 +54,8 @@ public class Startup
         
         //app.MapControllers();
         app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+        // Redirect to swagger
+        app.UseEndpoints(endpoints => endpoints.MapGet("/", async (http) => http.Response.Redirect("/api/v1/cases/swagger")));
     }
 }
