@@ -1,6 +1,8 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
+using gdi_cases_server.Modules.Cases.Models.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace gdi_cases_server.Modules.Cases.Controllers;
@@ -21,22 +23,31 @@ public class CasesController : Controller
     {
         return new ConstantsResult
         {
-            StatusHints = Enum.GetNames<StatusHint>().Select(s => s.ToLower()),
-            TypeHints = Enum.GetNames<ActionTypeHint>().Select(s => s.ToLower()),
+            StatusHints = Enum.GetNames<StatusHint>().Select(s => s.ToLower()).ToList(),
+            TypeHints = Enum.GetNames<ActionTypeHint>().Select(s => s.ToLower()).ToList(),
         };
     }
 
-    [HttpGet("list-cases-by-subject", Name = "listCasesBySubjectOperation")]
     [Authorize]
+    [HttpGet("list-cases-by-subject", Name = "listCasesBySubjectOperation")]
+    [Produces("text/json", "application/json")]
     public IEnumerable<Case> ListCasesBySubject(string subjectId) {
         return Database.ListCasesBySubject(subjectId);
     }
 
-    [HttpPut("upload", Name = "uploadCasesOperation")]
     [Authorize]
-    public UploadCasesResult UploadCases(CasesBundle bundle)
+    [HttpPut("upload", Name = "uploadCasesOperation")]
+    //[Consumes("text/json", "application/json", "text/xml", "application/xml")]
+    //[Produces("text/json", "application/json", "text/xml", "application/xml")]
+    public Bundle UploadCases(Bundle bundle)
     {
         Database.UpdateCases(bundle);
-        return new UploadCasesResult();
+        return bundle;
+    }
+
+    [HttpGet("generate-sample-bundle", Name = "generateSampleBundleOperation")]
+    public Bundle GenerateSampleBundle(string subjectId, int randomSeed = 0)
+    {
+        return new SampleDataGenerator().GenerateSampleBundle(subjectId, randomSeed);
     }
 }

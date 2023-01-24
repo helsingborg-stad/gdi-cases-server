@@ -16,11 +16,10 @@ public static class CasesApiKey
                 c.KeyName = "bearer";
             });
 
-        services.AddSingleton<ICasesApiKeys>(CasesApiKeys.TryCreateFromEnv() ?? CasesApiKeys.ConfigurationError());
-        return services;
+        return services.AddSwaggerGen(ConfigureSwaggerGen);
     }
 
-    public static void ConfigureSwaggerGen(SwaggerGenOptions options)
+    private static void ConfigureSwaggerGen(SwaggerGenOptions options)
     {
         options.AddSecurityDefinition("apiKeyAuth", new OpenApiSecurityScheme
         {

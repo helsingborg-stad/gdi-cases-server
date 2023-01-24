@@ -1,6 +1,7 @@
 ﻿using gdi_cases_server.Modules.Cases;
 using gdi_cases_server.Modules.Cases.Controllers;
 using gdi_cases_server.Modules.Cases.Models;
+using gdi_cases_server.Modules.Cases.Models.Json;
 
 namespace gdi_cases_server.tests;
 
@@ -10,7 +11,7 @@ public class CaseControllerTests: NiceToHaveTestBase
     [TestMethod, Description("CaseController submits bundles to its database")]
     public void UploadCasesSubmitsBundleToDatabase()
     {
-        var actualSumittedBundles = new List<CasesBundle>();
+        var actualSumittedBundles = new List<Bundle>();
 
         // Bundle to send as update to controller
         var testBundle = CreateTestCaseBundle(2);
@@ -32,14 +33,13 @@ public class CaseControllerTests: NiceToHaveTestBase
     // Simple fake instead of mock
     public class FakeDatabase : ICasesDatabase
     {
-        public Action<CasesBundle>? OnUpdateCases { get; set; }
+        public Action<Bundle>? OnUpdateCases { get; set; }
 
         public IEnumerable<Case> ListCasesBySubject(string subjectId)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateCases(CasesBundle bundle) => OnUpdateCases?.Invoke(bundle);
-        
+        public void UpdateCases(Bundle bundle) => OnUpdateCases?.Invoke(bundle);
     }
 }

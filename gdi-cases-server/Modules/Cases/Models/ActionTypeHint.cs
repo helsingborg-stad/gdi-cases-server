@@ -5,8 +5,8 @@ namespace gdi_cases_server.Modules.Cases.Models;
 
 public enum ActionTypeHint
 {
-    Link,
-    Document,
-    Image
+    link,
+    document,
+    image
 }
 

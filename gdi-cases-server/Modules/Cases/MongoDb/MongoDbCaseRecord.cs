@@ -1,4 +1,5 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
+using gdi_cases_server.Modules.Cases.Models.Json;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace gdi_cases_server.Modules.Cases.MongoDb;

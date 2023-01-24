@@ -1,14 +1,15 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
+using gdi_cases_server.Modules.Cases.Models.Json;
 
 namespace gdi_cases_server.tests;
 
 public class NiceToHaveTestBase
 {
-    public CasesBundle CreateTestCaseBundle(int casesCount = 2)
+    public Bundle CreateTestCaseBundle(int casesCount = 2)
     {
-        return new CasesBundle
+        return new Bundle
         {
-            Cases = Enumerable.Range(0, casesCount).Select(i => CreateTestCase(i))
+            Cases = Enumerable.Range(0, casesCount).Select(i => CreateTestCase(i)).ToList()
         };
 
 
@@ -25,8 +26,6 @@ public class NiceToHaveTestBase
         UpdateTime = FormatDate(DateTime.Now),
         Label = $"test-label-{seed}",
         Description = $"test-description-{seed}",
-        Events = Enumerable.Empty<CaseEvent>(),
-        Actions = Enumerable.Empty<CaseAction>()
     };
 
     private static string FormatDate(DateTime date)

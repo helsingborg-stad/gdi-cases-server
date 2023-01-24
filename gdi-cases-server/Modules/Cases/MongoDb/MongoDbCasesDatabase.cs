@@ -1,4 +1,5 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
+using gdi_cases_server.Modules.Cases.Models.Json;
 using MongoDB.Driver;
 
 namespace gdi_cases_server.Modules.Cases.MongoDb;
@@ -13,7 +14,7 @@ public class MongoDbCasesDatabase : ICasesDatabase
         Session = session;
     }
 
-    public MongoDbCaseRecord CreateCaseRecord(CasesBundle bundle, Case c) => new MongoDbCaseRecord
+    public MongoDbCaseRecord CreateCaseRecord(Bundle bundle, Case c) => new MongoDbCaseRecord
     {
         RecordId = $"{c.PublisherId}:{c.SystemId}:{c.CaseId}",
         SubjectId = c.SubjectId,
@@ -29,7 +30,7 @@ public class MongoDbCasesDatabase : ICasesDatabase
                .ToList();
     }
 
-    public void UpdateCases(CasesBundle bundle)
+    public void UpdateCases(Bundle bundle)
     {
         Collection.BulkWrite(
             from c in bundle.Cases

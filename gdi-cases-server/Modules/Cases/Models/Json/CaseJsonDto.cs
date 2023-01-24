@@ -1,11 +1,11 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using gdi_cases_server.Converters;
 using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace gdi_cases_server.Modules.Cases.Models;
+namespace gdi_cases_server.Modules.Cases.Models.Json;
 
 [Description("A case")]
 public class Case
@@ -34,22 +34,16 @@ public class Case
     [BsonElement("status"), Description("Display status")]
     public string? Status { get; set; } = "";
 
-    /*
-    [BsonElement("statusHint"), Description("Status hint")]
-    [JsonConverter(typeof(RelaxedEnumConverter<StatusHint>))]
-    public StatusHint StatusHint { get; set; } = StatusHint.Unknown;
-    */
     [BsonElement("statusHint"), Description("Status hint")]
     [JsonConverter(typeof(StringValuesFromEnumConverter<StatusHint>))]
     public string? StatusHint { get; set; } = "";
 
     [BsonElement("events")]
-    public IEnumerable<CaseEvent>? Events { get; set; } = Enumerable.Empty<CaseEvent>();
+    public List<Event>? Events { get; set; } = new List<Event>();
 
     [BsonElement("actions")]
-    public IEnumerable<CaseAction>? Actions { get; set; } = Enumerable.Empty<CaseAction>();
+    public List<Action>? Actions { get; set; } = new List<Action>();
 
     [BsonIgnore, Description("Deleted flag")]
     public bool IsDeleted { get; set; } = false;
 }
-

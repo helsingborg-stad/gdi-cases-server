@@ -16,13 +16,5 @@ public class CasesApiKeys : ICasesApiKeys
         return string.IsNullOrEmpty(apiKey) ? null : new CasesApiKeys(key => string.Equals(key, apiKey));
     }
 
-    public static ICasesApiKeys ConfigurationError()
-    {
-        return new CasesApiKeys(key =>
-        {
-            throw new ApplicationException("No API keys are defined.");
-        });
-    }
-
     public bool IsValidApiKey(string key) => ValidateKey(key);
 }

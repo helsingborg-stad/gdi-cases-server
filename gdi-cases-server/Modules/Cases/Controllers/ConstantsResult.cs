@@ -1,8 +1,11 @@
-﻿namespace gdi_cases_server.Modules.Cases.Controllers
+﻿using System.Runtime.Serialization;
+using System.Xml.Serialization;
+
+namespace gdi_cases_server.Modules.Cases.Controllers
 {
     public class ConstantsResult
     {
-        public IEnumerable<string>? StatusHints { get; internal set; }
-        public IEnumerable<string>? TypeHints { get; internal set; }
+        public List<string> StatusHints { get; internal set; } = new List<string>();
+        public List<string>? TypeHints { get; internal set; } = new List<string>();
     }
 }

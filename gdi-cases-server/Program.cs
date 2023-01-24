@@ -1,35 +1,42 @@
+using System.Collections;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using System.Runtime.Serialization;
 using dotenv.net;
 using gdi_cases_server.Authentication;
 using gdi_cases_server.Modules.Cases;
+using gdi_cases_server.Modules.Cases.Models;
+using gdi_cases_server.Modules.Cases.MongoDb;
+using gdi_cases_server.XmlSupport;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
-DotEnv.Load();
-var builder = WebApplication.CreateBuilder(args);
-
-
-// Add services to the container.
-builder.Services.AddCasesDatabase();
-builder.Services.AddCasesAuthentication();
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(CasesApiKey.ConfigureSwaggerGen);
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+public class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public static void Main(string[] args)
+    {
+        // Load configuration
+        DotEnv.Load();
+
+        // Setup configuration dependent services
+        var apiKeys = CasesApiKeys.TryCreateFromEnv()
+            ?? MissingConfiguration<ICasesApiKeys>("API key configuration is missing. Expected atleast API_KEY=... in environment.");
+        var database = new MongoDbCasesDatabaseFactory().TryCreateDatabaseFromEnv()
+            ?? MissingConfiguration<ICasesDatabase>("Database configuration is missing. Expected atleast MONGODB_URI=... in environment.");
+
+        // Run web application
+        CreateHostBuilder(apiKeys, database, args)
+            .Build()
+            .Run();
+    }
+
+    public static IHostBuilder CreateHostBuilder(
+        ICasesApiKeys apiKeys,
+        ICasesDatabase database,
+        params string[] args) => Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
+            .ConfigureServices(services => services.AddSingleton<ICasesDatabase>(database))
+            .ConfigureServices(services => services.AddSingleton<ICasesApiKeys>(apiKeys));
+
+    private static T MissingConfiguration<T>(string message) => throw new ApplicationException(message);
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
-

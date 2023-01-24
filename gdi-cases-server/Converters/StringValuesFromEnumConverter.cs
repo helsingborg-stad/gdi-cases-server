@@ -25,6 +25,6 @@ public class StringValuesFromEnumConverter<T> : JsonConverter<string> where T : 
     public override void Write(Utf8JsonWriter writer, string value, JsonSerializerOptions options)
     {
         writer.WriteStringValue(
-            Names.Contains(value) ? value.ToLower() : null);
+            Names.Contains(value) ? value.ToLower() : "");
     }
 }
