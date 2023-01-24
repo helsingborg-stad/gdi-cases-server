@@ -25,12 +25,12 @@ public class CaseEventXmlDto
 
     [Description("Display status")]
     //[DataMember(Name = "Status")]
-    public string? Status { get; set; } = "";
+    public string Status { get; set; } = "";
 
     [Description("Status hint")]
     //[DataMember(Name = "StatusHint")]
-    public string? StatusHint { get; set; } = "";
+    public string StatusHint { get; set; } = "";
 
     //[DataMember(Name = "Actions")]
-    public List<CaseActionXmlDto>? Actions { get; set; } = new List<CaseActionXmlDto>();
+    public List<CaseActionXmlDto> Actions { get; set; } = new List<CaseActionXmlDto>();
 }

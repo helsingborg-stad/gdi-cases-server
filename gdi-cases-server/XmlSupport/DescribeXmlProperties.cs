@@ -18,6 +18,31 @@ namespace gdi_cases_server.XmlSupport
 
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
+            if(context.Type.GetCustomAttribute<DataContractAttribute>() == null)
+            {
+                (
+                    from prop in context.Type.GetProperties()
+                    let schemaProp = schema.Properties.FirstOrDefault(p => string.Equals(p.Key, prop.Name, StringComparison.OrdinalIgnoreCase))
+                    where schemaProp.Key != null
+                    let xmlName = Coalesce(prop.Name)
+                    where !string.IsNullOrEmpty(xmlName)
+                    select new
+                    {
+                        schemaProp,
+                        xmlName
+                    })
+                .ToList()
+                .ForEach(rec =>
+                {
+                    if (rec.schemaProp.Value.Xml == null)
+                    {
+                        rec.schemaProp.Value.Xml = new OpenApiXml();
+                    }
+                    rec.schemaProp.Value.Xml.Name = rec.xmlName;
+                });
+            }
+
+
             if (context.Type.GetCustomAttribute<DataContractAttribute>() != null)
             {
                 (

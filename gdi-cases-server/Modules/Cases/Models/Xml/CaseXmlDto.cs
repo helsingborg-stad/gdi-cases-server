@@ -45,13 +45,13 @@ public class CaseXmlDto
 
     [Description("Status hint")]
     //[DataMember]
-    public string? StatusHint { get; set; } = "";
+    public string StatusHint { get; set; } = "";
 
     //[DataMember]
-    public List<CaseEventXmlDto>? Events { get; set; } = new List<CaseEventXmlDto>();
+    public List<CaseEventXmlDto> Events { get; set; } = new List<CaseEventXmlDto>();
 
     //[DataMember]
-    public List<CaseActionXmlDto>? Actions { get; set; } = new List<CaseActionXmlDto>();
+    public List<CaseActionXmlDto> Actions { get; set; } = new List<CaseActionXmlDto>();
 
     [Description("Deleted flag")]
     //[DataMember]

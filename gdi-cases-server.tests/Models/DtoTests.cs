@@ -11,6 +11,13 @@ namespace gdi_cases_server.tests.Models;
 public class DtoTests: ModelTestBase
 {
     [TestMethod]
+    public void DumpXml()
+    {
+        var b = GenerateSampleBundle();
+        // Console.WriteLine(ToXml(XmlDto.FromJsonDto(b)));
+        Console.WriteLine(ToXml(b));
+    }
+    [TestMethod]
     public void FromJsonDto()
     {
         // The XmlDto and JsonDto classes are used to convert between similar represenations

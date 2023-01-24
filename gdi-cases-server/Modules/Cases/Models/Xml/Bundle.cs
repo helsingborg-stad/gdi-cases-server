@@ -21,6 +21,6 @@ namespace gdi_cases_server.Modules.Cases.Models.Xml;
 public class CasesBundleXmlDto
 {
     //[DataMember]
-    public List<CaseXmlDto>? Cases { get; set; } = new List<CaseXmlDto>();
+    public List<CaseXmlDto> Cases { get; set; } = new List<CaseXmlDto>();
 }
 

@@ -23,7 +23,7 @@ public class CasesXmlController: Controller
     [HttpPut("upload", Name = "uploadXmlCasesOperation")]
     [Consumes("application/xml")]
     [Produces("application/json", "application/xml")]
-    public Bundle UploadCasesXml([FromBody] Bundle bundle)
+    public CasesBundleXmlDto UploadCasesXml([FromBody] CasesBundleXmlDto bundle)
     {
         if (ModelState.IsValid)
         {

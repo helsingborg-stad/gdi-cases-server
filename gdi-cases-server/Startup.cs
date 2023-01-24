@@ -17,6 +17,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         //services.AddControllers().AddXmlSerializerFormatters();
+        services.AddControllers().AddXmlSerializerFormatters();
+
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddCasesAuthentication();
         services.AddCasesXmlSupport();
