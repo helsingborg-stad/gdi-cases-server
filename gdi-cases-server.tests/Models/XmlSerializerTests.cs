@@ -1,7 +1,6 @@
 ﻿using DeepEqual.Syntax;
 using gdi_cases_server.Modules.Cases.Models;
 using gdi_cases_server.Modules.Cases.Models.Json;
-using gdi_cases_server.Modules.Cases.Models.Xml;
 
 namespace gdi_cases_server.tests.Models;
 
@@ -10,7 +9,7 @@ public class XmlSerializerTests: ModelTestBase {
     [TestMethod]
     public void XmlCanBeParsed () {
         var b = GenerateSampleBundle();
-        FromXml<CasesBundleXmlDto>(ToXml(XmlDto.FromJsonDto(b))).ShouldDeepEqual(b);
+        FromXml<Bundle>(ToXml(b)).ShouldDeepEqual(b);
     }
 }
 

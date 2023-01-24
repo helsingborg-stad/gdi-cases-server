@@ -41,6 +41,5 @@ public class CaseControllerTests: NiceToHaveTestBase
         }
 
         public void UpdateCases(Bundle bundle) => OnUpdateCases?.Invoke(bundle);
-        
     }
 }

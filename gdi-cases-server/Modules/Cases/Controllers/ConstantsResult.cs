@@ -3,7 +3,6 @@ using System.Xml.Serialization;
 
 namespace gdi_cases_server.Modules.Cases.Controllers
 {
-    //[DataContract(Name = "Constants")]
     public class ConstantsResult
     {
         public List<string> StatusHints { get; internal set; } = new List<string>();

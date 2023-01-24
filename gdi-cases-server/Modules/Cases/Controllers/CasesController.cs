@@ -9,7 +9,6 @@ namespace gdi_cases_server.Modules.Cases.Controllers;
 
 [ApiController]
 [Route("/api/v1/cases")]
-[SwaggerTag("JSON REST API")]
 public class CasesController : Controller
 {
     public CasesController(ICasesDatabase casesDatabase)
@@ -42,7 +41,7 @@ public class CasesController : Controller
     //[Produces("text/json", "application/json", "text/xml", "application/xml")]
     public Bundle UploadCases(Bundle bundle)
     {
-        // Database.UpdateCases(bundle);
+        Database.UpdateCases(bundle);
         return bundle;
     }
 
