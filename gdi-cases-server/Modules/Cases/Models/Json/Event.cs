@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Runtime.Serialization;
 using System.Xml.Linq;
+using gdi_cases_server.Modules.Cases.Models.Validators;
 
 namespace gdi_cases_server.Modules.Cases.Models.Json;
 
@@ -21,13 +22,13 @@ public class Event
     public string Description { get; set; } = "";
 
     [BsonElement("status"), Description("Display status")]
-    public string? Status { get; set; } = "";
+    public string Status { get; set; } = "";
 
     [BsonElement("statusHint"), Description("Status hint")]
     [JsonConverter(typeof(StringValuesFromEnumConverter<StatusHint>))]
-    public string? StatusHint { get; set; } = "";
+    public string StatusHint { get; set; } = "";
 
     [BsonElement("actions")]
-    public List<Action>? Actions { get; set; } = new List<Action>();
+    public List<Action> Actions { get; set; } = new List<Action>();
 }
 

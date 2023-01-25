@@ -37,8 +37,6 @@ public class CasesController : Controller
 
     [Authorize]
     [HttpPut("upload", Name = "uploadCasesOperation")]
-    //[Consumes("text/json", "application/json", "text/xml", "application/xml")]
-    //[Produces("text/json", "application/json", "text/xml", "application/xml")]
     public Bundle UploadCases(Bundle bundle)
     {
         Database.UpdateCases(bundle);
