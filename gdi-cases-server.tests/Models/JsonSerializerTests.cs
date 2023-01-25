@@ -1,14 +1,15 @@
 ﻿using DeepEqual.Syntax;
-using gdi_cases_server.Modules.Cases.Models;
 using gdi_cases_server.Modules.Cases.Models.Json;
 
 namespace gdi_cases_server.tests.Models;
 
 [TestClass]
-public class XmlSerializerTests: ModelTestBase {
+public class JsonSerializerTests: ModelTestBase
+{
     [TestMethod]
-    public void XmlCanBeParsed () {
+    public void JsonCanBeParsed()
+    {
         var b = GenerateSampleBundle();
-        FromXml<Bundle>(ToXml(b)).ShouldDeepEqual(b);
+        FromJson<Bundle>(ToJson(b)).ShouldDeepEqual(b);
     }
 }
