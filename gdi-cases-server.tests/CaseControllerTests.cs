@@ -1,4 +1,5 @@
-﻿using gdi_cases_server.Modules.Cases;
+﻿using DeepEqual.Syntax;
+using gdi_cases_server.Modules.Cases;
 using gdi_cases_server.Modules.Cases.Controllers;
 using gdi_cases_server.Modules.Cases.Models;
 using gdi_cases_server.Modules.Cases.Models.Json;
@@ -27,7 +28,7 @@ public class CaseControllerTests: NiceToHaveTestBase
         controller.UploadCases(testBundle);
 
         Assert.AreEqual(1, actualSumittedBundles.Count);
-        Assert.AreSame(testBundle, actualSumittedBundles[0]);
+        Assert.IsTrue(testBundle.IsDeepEqual(actualSumittedBundles[0]));
     }
 
     // Simple fake instead of mock

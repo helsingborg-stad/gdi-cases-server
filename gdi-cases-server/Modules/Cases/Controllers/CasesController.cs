@@ -1,5 +1,6 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
 using gdi_cases_server.Modules.Cases.Models.Json;
+using gdi_cases_server.Modules.Cases.Models.Normalization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -39,7 +40,7 @@ public class CasesController : Controller
     [HttpPut("upload", Name = "uploadCasesOperation")]
     public Bundle UploadCases(Bundle bundle)
     {
-        Database.UpdateCases(bundle);
+        Database.UpdateCases(bundle.Normalize());
         return bundle;
     }
 

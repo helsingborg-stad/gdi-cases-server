@@ -6,30 +6,29 @@ using gdi_cases_server.Modules.Cases;
 using gdi_cases_server.Modules.Cases.Controllers;
 using Moq;
 
-namespace gdi_cases_server.tests.Models
-{
-    [TestClass]
-	public class Scratchpad: WebserverTestBase
+namespace gdi_cases_server.tests.Models;
+
+[TestClass]
+public class Scratchpad: WebserverTestBase
     {
         [TestMethod]
-		public async Task X()
+	public async Task X()
+	{
+		var apiKeys = new CasesApiKeys(key => true);
+		var database = new Mock<ICasesDatabase>().Object;
+		await WithWebServer(
+			apiKeys,
+			database,
+			async client =>
 		{
-			var apiKeys = new CasesApiKeys(key => true);
-			var database = new Mock<ICasesDatabase>().Object;
-			await WithWebServer(
-				apiKeys,
-				database,
-				async client =>
-			{
-				var c = await Request(client, "/api/v1/cases/get-constants")
+			var c = await Request(client, "/api/v1/cases/get-constants")
                     .WithHeader("Accept", "application/json")
 //					.WithHeader("Authorization", "api-key test")
-					.GetAsync()
-					.ReceiveJson<ConstantsResult>();
+				.GetAsync()
+				.ReceiveJson<ConstantsResult>();
 
-				Console.Write(c);
-			});
+			Console.Write(c);
+		});
         }
-	}
 }
 

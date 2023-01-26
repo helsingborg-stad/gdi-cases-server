@@ -32,6 +32,7 @@
     <None Remove="Swashbuckle.AspNetCore.Annotations" />
     <None Remove="Microsoft.AspNetCore.Mvc.Formatters.Xml" />
     <None Remove="Modules\Cases\Models\Validators\" />
+    <None Remove="Modules\Cases\Models\Normalization\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Modules\" />
@@ -44,5 +45,6 @@
     <Folder Include="XmlSupport\" />
     <Folder Include="Modules\Cases\Models\Json\" />
     <Folder Include="Modules\Cases\Models\Validators\" />
+    <Folder Include="Modules\Cases\Models\Normalization\" />
   </ItemGroup>
 </Project>

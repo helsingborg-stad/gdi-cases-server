@@ -34,9 +34,16 @@
     <None Remove="FluentlyHttpClient" />
     <None Remove="Flurl.Http" />
     <None Remove="Models\Validators\" />
+    <None Remove="Models\Normalization\" />
+    <None Remove="NBuilder" />
+    <None Remove="TestUtilities\" />
+    <None Remove="TestUtilities\Samples\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Models\Validators\" />
+    <Folder Include="Models\Normalization\" />
+    <Folder Include="TestUtilities\" />
+    <Folder Include="TestUtilities\Samples\" />
   </ItemGroup>
 </Project>

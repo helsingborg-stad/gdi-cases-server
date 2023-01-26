@@ -1,15 +1,15 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json;
-using gdi_cases_server.Converters;
 using System.Text.Json.Serialization;
-using MongoDB.Bson.Serialization.Attributes;
+using gdi_cases_server.Converters;
+using gdi_cases_server.Modules.Cases.Models.Normalization;
 using gdi_cases_server.Modules.Cases.Models.Validators;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace gdi_cases_server.Modules.Cases.Models.Json;
 
 [Description("A case")]
-public class Case
+public class Case: INormalizable<Case>
 {
     [Required, BsonElement("publisherId"), StringLength(maximumLength: 128, MinimumLength = 3), Description("Publisher Id. Usually an organisation or self governed unit.")]
     [Id]
@@ -43,12 +43,28 @@ public class Case
     [JsonConverter(typeof(StringValuesFromEnumConverter<StatusHint>))]
     public string StatusHint { get; set; } = "";
 
+    [BsonIgnore, Description("Deleted flag")]
+    public bool IsDeleted { get; set; } = false;
+
     [BsonElement("events")]
     public List<Event> Events { get; set; } = new List<Event>();
 
     [BsonElement("actions")]
-    public List<Action>? Actions { get; set; } = new List<Action>();
+    public List<Action> Actions { get; set; } = new List<Action>();
 
-    [BsonIgnore, Description("Deleted flag")]
-    public bool IsDeleted { get; set; } = false;
+    public Case Normalize(INormalizer n) => new Case
+    {
+        PublisherId = n.String(PublisherId),
+        SystemId = n.String(SystemId),
+        CaseId = n.String(CaseId),
+        SubjectId = n.String(SubjectId),
+        UpdateTime = n.Date(UpdateTime),
+        Label = n.String(Label),
+        Description = n.String(Description),
+        Status = n.String(Status),
+        StatusHint = n.Enum<StatusHint>(StatusHint),
+        Events = n.List(Events),
+        Actions = n.List(Actions),
+        IsDeleted = IsDeleted
+    };
 }

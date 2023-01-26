@@ -11,8 +11,6 @@ public class NiceToHaveTestBase
         {
             Cases = Enumerable.Range(0, casesCount).Select(i => CreateTestCase(i)).ToList()
         };
-
-
     }
 
     // Create a simple testcase

@@ -16,7 +16,6 @@ public class WebserverTestBase
         public T Deserialize<T>(string s) => JsonSerializer.Deserialize<T>(s);
         public T Deserialize<T>(Stream stream) => JsonSerializer.Deserialize<T>(stream);
         public string Serialize(object obj) => JsonSerializer.Serialize(obj);
-
     }
 
     public IHostBuilder CreateHostBuilder(ICasesApiKeys apiKeys, ICasesDatabase database) =>
