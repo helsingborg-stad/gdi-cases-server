@@ -40,8 +40,9 @@ public class CasesController : Controller
     [HttpPut("upload", Name = "uploadCasesOperation")]
     public Bundle UploadCases(Bundle bundle)
     {
-        Database.UpdateCases(bundle.Normalize());
-        return bundle;
+        var normalizedBundle = bundle.Normalize();
+        Database.UpdateCases(normalizedBundle);
+        return normalizedBundle;
     }
 
     [HttpGet("generate-sample-bundle", Name = "generateSampleBundleOperation")]

@@ -3,6 +3,7 @@ using gdi_cases_server.Modules.Cases;
 using gdi_cases_server.Modules.Cases.Controllers;
 using gdi_cases_server.Modules.Cases.Models;
 using gdi_cases_server.Modules.Cases.Models.Json;
+using gdi_cases_server.Modules.Cases.Models.Normalization;
 
 namespace gdi_cases_server.tests;
 
@@ -29,6 +30,40 @@ public class CaseControllerTests: NiceToHaveTestBase
 
         Assert.AreEqual(1, actualSumittedBundles.Count);
         Assert.IsTrue(testBundle.IsDeepEqual(actualSumittedBundles[0]));
+    }
+
+    [TestMethod]
+    public void UploadCasesSubmitsNormalizedBundleToDatabase()
+    {
+        var bundle = new Bundle
+        {
+            Cases = new List<Case>() {
+                new Case()
+                {
+                    PublisherId = "\tpublisherId\t",
+                    CaseId = "    caseid    ",
+                    SystemId = "\r\n systemId\r\n   ",
+                    SubjectId = " a subject of some kind "
+                }
+            }
+        };
+
+        // Create a controller, relying on our database so we can intercept
+        // and assert on expected calls
+        var actualSumittedBundles = new List<Bundle>();
+
+        var controller = new CasesController(new FakeDatabase()
+        {
+            OnUpdateCases = bundle => actualSumittedBundles.Add(bundle)
+        });
+
+        // Simulate REST call
+        controller.UploadCases(bundle);
+
+        Assert.AreEqual(1, actualSumittedBundles.Count);
+        Assert.IsTrue(
+            bundle.Normalize()
+            .IsDeepEqual(actualSumittedBundles[0]));
     }
 
     // Simple fake instead of mock
