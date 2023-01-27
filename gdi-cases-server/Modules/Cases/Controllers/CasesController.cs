@@ -1,5 +1,5 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
-using gdi_cases_server.Modules.Cases.Models.Json;
+using gdi_cases_server.Modules.Cases.Models.Cases;
 using gdi_cases_server.Modules.Cases.Models.Normalization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

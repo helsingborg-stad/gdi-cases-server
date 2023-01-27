@@ -1,5 +1,5 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
-using gdi_cases_server.Modules.Cases.Models.Json;
+using gdi_cases_server.Modules.Cases.Models.Cases;
 using MongoDB.Driver;
 
 namespace gdi_cases_server.Modules.Cases.MongoDb;
@@ -41,14 +41,5 @@ public class MongoDbCasesDatabase : ICasesDatabase
                 : new ReplaceOneModel<MongoDbCaseRecord>(filter, record) { IsUpsert = true }
             select writeModel
             );
-        /*
-        Collection.BulkWrite(
-            from caseRecord in caseRecords
-            let writeModel = new ReplaceOneModel<MongoDbCaseRecord>(
-                Builders<MongoDbCaseRecord>.Filter.Where(rec => rec.RecordId == caseRecord.RecordId),
-                caseRecord)
-            { IsUpsert = true }
-            select writeModel);
-        */
     }
 }

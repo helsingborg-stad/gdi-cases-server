@@ -5,7 +5,7 @@ using gdi_cases_server.Converters;
 using gdi_cases_server.Modules.Cases.Models.Normalization;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace gdi_cases_server.Modules.Cases.Models.Json;
+namespace gdi_cases_server.Modules.Cases.Models.Cases;
 
 [Description("A description of a milestone in a case process")]
 public class Event: INormalizable<Event>

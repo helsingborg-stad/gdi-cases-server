@@ -1,4 +1,4 @@
-﻿using gdi_cases_server.Modules.Cases.Models.Json;
+﻿using gdi_cases_server.Modules.Cases.Models.Cases;
 using Microsoft.AspNetCore.Mvc;
 using System.Xml.Linq;
 
@@ -71,12 +71,12 @@ namespace gdi_cases_server.Modules.Cases.Models
                                      StatusHint = statusHint,
                                      Status = statusHint,
                                      Actions = (from i in Enumerable.Range(0, random.Next(2))
-                                               select new Json.Action
+                                               select new Cases.Action
                                                {
                                                    Label = $"E-tjänst {i}",
                                                    Url = "https://www.example.com",
                                                    TypeHint = ActionTypeHint.link.ToString()
-                                               }).ToList<Json.Action>()
+                                               }).ToList<Cases.Action>()
                                  })
                                 .ToList<Event>()
                    select new Case
@@ -93,12 +93,12 @@ namespace gdi_cases_server.Modules.Cases.Models
                        Description = label,
                        Events = events,
                        Actions = (from i in Enumerable.Range(0, random.Next(2))
-                                 select new Json.Action
+                                 select new Cases.Action
                                  {
                                      Label = $"Visa i E-tjänsten ({i + 1})",
                                      Url = "https://www.example.com",
                                      TypeHint = ActionTypeHint.link.ToString()
-                                 }).ToList<Json.Action>()
+                                 }).ToList<Cases.Action>()
                    };
         }
 

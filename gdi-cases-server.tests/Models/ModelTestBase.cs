@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Xml.Serialization;
 using gdi_cases_server.Modules.Cases.Models;
-using gdi_cases_server.Modules.Cases.Models.Json;
+using gdi_cases_server.Modules.Cases.Models.Cases;
 
 namespace gdi_cases_server.tests.Models;
 

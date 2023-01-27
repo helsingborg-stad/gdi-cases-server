@@ -1,6 +1,6 @@
 ﻿using DeepEqual.Syntax;
 using gdi_cases_server.Modules.Cases.Models;
-using gdi_cases_server.Modules.Cases.Models.Json;
+using gdi_cases_server.Modules.Cases.Models.Cases;
 
 namespace gdi_cases_server.tests.Models;
 

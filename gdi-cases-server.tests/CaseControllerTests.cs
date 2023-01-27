@@ -2,7 +2,7 @@
 using gdi_cases_server.Modules.Cases;
 using gdi_cases_server.Modules.Cases.Controllers;
 using gdi_cases_server.Modules.Cases.Models;
-using gdi_cases_server.Modules.Cases.Models.Json;
+using gdi_cases_server.Modules.Cases.Models.Cases;
 using gdi_cases_server.Modules.Cases.Models.Normalization;
 
 namespace gdi_cases_server.tests;

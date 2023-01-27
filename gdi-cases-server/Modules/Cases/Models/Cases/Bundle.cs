@@ -2,7 +2,7 @@
 using gdi_cases_server.Modules.Cases.Models.Normalization;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace gdi_cases_server.Modules.Cases.Models.Json;
+namespace gdi_cases_server.Modules.Cases.Models.Cases;
 
 public class Bundle: INormalizable<Bundle>
 {

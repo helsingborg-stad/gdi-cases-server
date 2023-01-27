@@ -1,5 +1,5 @@
 ﻿using DeepEqual.Syntax;
-using gdi_cases_server.Modules.Cases.Models.Json;
+using gdi_cases_server.Modules.Cases.Models.Cases;
 using gdi_cases_server.Modules.Cases.Models.Normalization;
 using gdi_cases_server.tests.TestUtilities.Samples;
 
@@ -20,7 +20,7 @@ public class NormalizeCoverageTests: NormalizationTestBase
             // each list has 3 elements
             .Map<List<Case>>((cases, pi, p) => Enumerable.Range(0, 3).Select(i => p.Map<Case>()).ToList())
             .Map<List<Event>>((cases, pi, p) => Enumerable.Range(0, 3).Select(i => p.Map<Event>()).ToList())
-            .Map<List<Modules.Cases.Models.Json.Action>>((cases, pi, p) => Enumerable.Range(0, 3).Select(i => p.Map<Modules.Cases.Models.Json.Action>()).ToList())
+            .Map<List<Modules.Cases.Models.Cases.Action>>((cases, pi, p) => Enumerable.Range(0, 3).Select(i => p.Map<Modules.Cases.Models.Cases.Action>()).ToList())
             .Build();
 
 

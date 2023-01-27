@@ -28,7 +28,6 @@
     <None Remove="AspNetCore.Authentication.ApiKey" />
     <None Remove="Converters\" />
     <None Remove="XmlSupport\" />
-    <None Remove="Modules\Cases\Models\Json\" />
     <None Remove="Swashbuckle.AspNetCore.Annotations" />
     <None Remove="Microsoft.AspNetCore.Mvc.Formatters.Xml" />
     <None Remove="Modules\Cases\Models\Validators\" />
@@ -43,7 +42,6 @@
     <Folder Include="Authentication\" />
     <Folder Include="Converters\" />
     <Folder Include="XmlSupport\" />
-    <Folder Include="Modules\Cases\Models\Json\" />
     <Folder Include="Modules\Cases\Models\Validators\" />
     <Folder Include="Modules\Cases\Models\Normalization\" />
   </ItemGroup>

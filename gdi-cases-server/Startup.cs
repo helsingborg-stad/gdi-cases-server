@@ -42,8 +42,10 @@ public class Startup
     {
         // Configure the HTTP request pipeline.
         app.UseSwagger(c => c.RouteTemplate = "api/v1/cases/swagger/{documentName}/swagger.json");
+        //app.UseSwagger(c => c.v)
         app.UseSwaggerUI(c =>
         {
+            
             c.RoutePrefix = "api/v1/cases/swagger";
         });
 
