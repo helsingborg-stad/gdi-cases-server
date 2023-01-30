@@ -1,5 +1,6 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
 using gdi_cases_server.Modules.Cases.Models.Cases;
+using gdi_cases_server.Modules.Cases.Models.Constants;
 using gdi_cases_server.Modules.Cases.Models.Normalization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,12 +21,12 @@ public class CasesController : Controller
     public ICasesDatabase Database { get; }
 
     [HttpGet("get-constants", Name = "getConstantsOperation")]
-    public ConstantsResult Constants()
+    public Constants Constants()
     {
-        return new ConstantsResult
+        return new Constants()
         {
-            StatusHints = Enum.GetNames<StatusHint>().Select(s => s.ToLower()).ToList(),
-            TypeHints = Enum.GetNames<ActionTypeHint>().Select(s => s.ToLower()).ToList(),
+            CaseActionTypeHints = Enumeration.FromEnum<ActionTypeHint>(),
+            CaseStatusHints = Enumeration.FromEnum<StatusHint>()
         };
     }
 

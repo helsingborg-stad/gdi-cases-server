@@ -1,21 +1,21 @@
-﻿using System.Text.Json;
-using Flurl.Http;
+﻿using Flurl.Http;
 using Flurl.Http.Configuration;
 using gdi_cases_server.Authentication;
 using gdi_cases_server.Modules.Cases;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;
-using static gdi_cases_server.tests.Models.Scratchpad;
+using System.Text.Json;
 
-namespace gdi_cases_server.tests;
+namespace gdi_cases_server.tests.WebRequestTests;
 
-public class WebserverTestBase
+public class WebserverTestBase : NiceToHaveTestBase
 {
     public class JsonSerializerForFlurl : ISerializer
     {
-        public T Deserialize<T>(string s) => JsonSerializer.Deserialize<T>(s);
-        public T Deserialize<T>(Stream stream) => JsonSerializer.Deserialize<T>(stream);
-        public string Serialize(object obj) => JsonSerializer.Serialize(obj);
+        private static readonly JsonSerializerOptions _options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+        public T Deserialize<T>(string s) => JsonSerializer.Deserialize<T>(s, _options);
+        public T Deserialize<T>(Stream stream) => JsonSerializer.Deserialize<T>(stream, _options);
+        public string Serialize(object obj) => JsonSerializer.Serialize(obj, _options);
     }
 
     public IHostBuilder CreateHostBuilder(ICasesApiKeys apiKeys, ICasesDatabase database) =>
@@ -45,3 +45,5 @@ public class WebserverTestBase
         return request;
     }
 }
+
+

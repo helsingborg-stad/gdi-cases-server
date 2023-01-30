@@ -23,7 +23,6 @@ public class NormalizeCoverageTests: NormalizationTestBase
             .Map<List<Modules.Cases.Models.Cases.Action>>((cases, pi, p) => Enumerable.Range(0, 3).Select(i => p.Map<Modules.Cases.Models.Cases.Action>()).ToList())
             .Build();
 
-
     [TestMethod]
     public void SampleDataIsGemeratedAsExpected()
     {
@@ -92,6 +91,7 @@ public class NormalizeCoverageTests: NormalizationTestBase
 
         Assert.IsTrue(bundle.IsDeepEqual(bundle.Normalize()));
         Assert.AreEqual(ToXml(bundle), ToXml(bundle.Normalize()));
+        Assert.AreEqual(ToJson(bundle), ToJson(bundle.Normalize()));
     }
 
     [TestMethod]
@@ -114,6 +114,9 @@ public class NormalizeCoverageTests: NormalizationTestBase
         Assert.AreEqual(
             ToXml(normalizedBundle),
             ToXml(wsBundle.Normalize()));
+        Assert.AreEqual(
+            ToJson(normalizedBundle),
+            ToJson(wsBundle.Normalize()));
     }
 }
 

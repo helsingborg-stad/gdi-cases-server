@@ -26,24 +26,9 @@
     <ProjectReference Include="..\gdi-cases-server\gdi-cases-server.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="DeepEqual" />
-    <None Remove="Models\" />
-    <None Remove="Microsoft.AspNetCore.Mvc.Testing" />
-    <None Remove="Moq" />
-    <None Remove="Pathoschild.Http.FluentClient" />
-    <None Remove="FluentlyHttpClient" />
-    <None Remove="Flurl.Http" />
-    <None Remove="Models\Validators\" />
-    <None Remove="Models\Normalization\" />
-    <None Remove="NBuilder" />
-    <None Remove="TestUtilities\" />
-    <None Remove="TestUtilities\Samples\" />
+    <None Remove="WebRequestTests\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Models\Validators\" />
-    <Folder Include="Models\Normalization\" />
-    <Folder Include="TestUtilities\" />
-    <Folder Include="TestUtilities\Samples\" />
+    <Folder Include="WebRequestTests\" />
   </ItemGroup>
 </Project>
