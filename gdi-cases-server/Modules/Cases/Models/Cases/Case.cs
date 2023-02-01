@@ -30,6 +30,12 @@ public class Case: INormalizable<Case>
     [Required, BsonElement("updateTime"), Description("Time of update"), Range(typeof(DateTime), "1971-01-01", "3000-01-01")]
     public string UpdateTime { get; set; } = "";
 
+    [BsonElement("expires"), Description("Time of expiration"), Range(typeof(DateTime), "1971-01-01", "3000-01-01")]
+    public string Expires { get; set; } = "";
+
+    [BsonElement("organization"), Description("Organization name")]
+    public string Organization { get; set; } = "";
+
     [BsonElement("label"), Description("Display label")]
     public string Label { get; set; } = "";
 
@@ -59,6 +65,8 @@ public class Case: INormalizable<Case>
         CaseId = n.String(CaseId),
         SubjectId = n.String(SubjectId),
         UpdateTime = n.Date(UpdateTime),
+        Expires = n.Date(Expires),
+        Organization = n.String(Organization),
         Label = n.String(Label),
         Description = n.String(Description),
         Status = n.String(Status),
