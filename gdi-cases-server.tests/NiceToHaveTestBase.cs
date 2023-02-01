@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Xml;
 using System.Xml.Serialization;
 using gdi_cases_server.Modules.Cases.Models;
 using gdi_cases_server.Modules.Cases.Models.Cases;
@@ -42,10 +43,19 @@ public class NiceToHaveTestBase
 
     public static string ToXml<T>(T value)
     {
+        // Searialize to Xml but omit declarations, which causes trouble in so many test cases
+        var sw = new StringWriter();
+        using (var writer = XmlWriter.Create(sw, new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true }))
+        {
+            new XmlSerializer(typeof(T)).Serialize(writer, value);
+        }
+        return sw.ToString();
+        /*
         var serializer = new XmlSerializer(typeof(T));
         var sw = new StringWriter();
         serializer.Serialize(sw, value);
         return sw.ToString();
+        */
     }
 
     public static string ToJson<T>(T value) => JsonSerializer.Serialize<T>(value, new JsonSerializerOptions { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });

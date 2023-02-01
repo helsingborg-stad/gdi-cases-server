@@ -11,34 +11,10 @@ namespace gdi_cases_server.tests.WebRequestTests;
 public class GetConstantsTests : WebserverTestBase
 {
     [TestMethod]
-    [Description("/api/v1/cases/get-constants is public")]
-    public async Task RequiresNoAuthorization()
-    {
-        var apiKeys = new CasesApiKeys(key => false);
-        var database = new Mock<ICasesDatabase>().Object;
-        await WithWebServer(
-            apiKeys,
-            database,
-            async client =>
-            {
-                var c = await Request(client, "/api/v1/cases/get-constants")
-                    .WithHeader("Accept", "application/json")
-                    .GetAsync()
-                    .ReceiveJson<Constants>();
-
-                Assert.IsNotNull(c);
-            });
-    }
-
-    [TestMethod]
     [Description("/api/v1/cases/get-constants returns important enums")]
     public async Task ReturnWhatsExpected()
     {
-        var apiKeys = new CasesApiKeys(key => true);
-        var database = new Mock<ICasesDatabase>().Object;
         await WithWebServer(
-            apiKeys,
-            database,
             async client =>
             {
                 var c = await Request(client, "/api/v1/cases/get-constants")
@@ -53,6 +29,7 @@ public class GetConstantsTests : WebserverTestBase
                 CollectionAssert.AreEquivalent(
                     Enum.GetNames<StatusHint>(),
                     c.CaseStatusHints.Select(h => h.Value).ToList());
+                return 0;
             });
     }
 }

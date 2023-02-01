@@ -12,23 +12,10 @@ public class ListCasesBySubjectTests : WebserverTestBase
 
     [TestMethod]
     [Description("/api/v1/cases/list-cases-by-subject requires authorization")]
-    public async Task RequiresAuthorization()
-    {
-        var apiKeys = new CasesApiKeys(key => key == "test-api-key");
-        var database = new Mock<ICasesDatabase>().Object;
-        await WithWebServer(
-            apiKeys,
-            database,
-            async client =>
-            {
-                var response = await Request(client, "/api/v1/cases/list-cases-by-subject")
-                    .WithHeader("Accept", "application/json")
-                    .AllowAnyHttpStatus()
-                    .GetAsync();
-
-                Assert.AreEqual(401, response.StatusCode);
-            });
-    }
+    public Task RequiresAuthorization() => Get("/api/v1/cases/list-cases-by-subject")
+            .UseApiKeys(key => false)
+            .UseDatabase(new Mock<ICasesDatabase>().Object)
+            .Send(r => Assert.AreEqual(401, r.StatusCode));
 
     [TestMethod]
     [Description("/api/v1/cases/list-cases-by-subject can be authorized")]
@@ -63,6 +50,7 @@ public class ListCasesBySubjectTests : WebserverTestBase
                 Assert.IsNotNull(cases);
                 Assert.AreEqual(1, cases.Count);
                 Assert.AreEqual("testCaseId", cases[0].CaseId);
+                return true;
             });
     }
 }
