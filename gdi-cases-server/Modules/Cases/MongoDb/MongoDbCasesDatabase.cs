@@ -1,6 +1,7 @@
 ﻿using gdi_cases_server.Modules.Cases.Models;
 using gdi_cases_server.Modules.Cases.Models.Cases;
 using MongoDB.Driver;
+using gdi_cases_server.Modules.Cases.Models.Normalization;
 
 namespace gdi_cases_server.Modules.Cases.MongoDb;
 
@@ -19,14 +20,18 @@ public class MongoDbCasesDatabase : ICasesDatabase
         RecordId = $"{c.PublisherId}:{c.SystemId}:{c.CaseId}",
         SubjectId = c.SubjectId,
         Case = c,
-        UpdateTime = DateTime.Now
+        UpdateTime = DateTime.Now,
+        IsMarkedAsRead = false
     };
 
-    public IEnumerable<Case> ListCasesBySubject(string subjectId)
+    public IEnumerable<AnnotatedCase> ListCasesBySubject(string subjectId)
     {
         return (
             from record in Collection.Find<MongoDbCaseRecord>(record => record.SubjectId == subjectId).ToEnumerable<MongoDbCaseRecord>()
-            select record.Case)
+            let c = record.Case
+            where c != null
+            let ac = c.Normalize<Case, AnnotatedCase>()
+            select ac)
                .ToList();
     }
 
@@ -34,11 +39,23 @@ public class MongoDbCasesDatabase : ICasesDatabase
     {
         Collection.BulkWrite(
             from c in bundle.Cases
-            let record = CreateCaseRecord(bundle, c)
-            let filter = Builders<MongoDbCaseRecord>.Filter.Where(rec => rec.RecordId == record.RecordId)
+            let r = CreateCaseRecord(bundle, c)
+            let filter = Builders<MongoDbCaseRecord>.Filter.Where(rec => rec.RecordId == r.RecordId)
             let writeModel = c.IsDeleted
                 ? new DeleteOneModel<MongoDbCaseRecord>(filter) as WriteModel<MongoDbCaseRecord>
-                : new ReplaceOneModel<MongoDbCaseRecord>(filter, record) { IsUpsert = true }
+                //: new ReplaceOneModel<MongoDbCaseRecord>(filter, record) { IsUpsert = true }
+                : new UpdateOneModel<MongoDbCaseRecord>(
+                    filter,
+                    Builders<MongoDbCaseRecord>.Update
+                        .Set(r => r.RecordId, r.RecordId)
+                        .Set(r => r.SubjectId, r.SubjectId)
+                        .Set(r => r.SchemaVersion, r.SchemaVersion)
+                        .Set(r => r.UpdateTime, r.UpdateTime)
+                        .Set(r => r.Case, r.Case)
+                        // we explicitly exclude visited fields
+                    )
+                { IsUpsert = true }
+                
             select writeModel
             );
     }

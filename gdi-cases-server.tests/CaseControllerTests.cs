@@ -71,7 +71,7 @@ public class CaseControllerTests: NiceToHaveTestBase
     {
         public Action<Bundle>? OnUpdateCases { get; set; }
 
-        public IEnumerable<Case> ListCasesBySubject(string subjectId)
+        public IEnumerable<AnnotatedCase> ListCasesBySubject(string subjectId)
         {
             throw new NotImplementedException();
         }

@@ -16,9 +16,9 @@ public class Normalizer : INormalizer
 
     public string Enum<T>(string value) where T : struct, Enum => EnumNormalizer<T>.Normalize(value);
 
-    public List<T> List<T>(List<T> list) where T : INormalizable<T> => (list ?? Enumerable.Empty<T>()).Where(item => item != null).Select(item => item.Normalize(this)).ToList();
+    public List<TNew> List<T, TNew>(List<T> list) where T : INormalizable<T> where TNew : T, new() => (list ?? Enumerable.Empty<T>()).Where(item => item != null).Select(item => item.Normalize<TNew>(this)).ToList();
 
-    public T Object<T>(T value) where T : INormalizable<T> => value.Normalize(this);
+    public TNew Object<T, TNew>(T value) where T : INormalizable<T> where TNew : T, new() => value.Normalize<TNew>(this);
 
     public string String(string value) => string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
 }

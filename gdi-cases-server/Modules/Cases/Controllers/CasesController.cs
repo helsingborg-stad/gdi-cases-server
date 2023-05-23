@@ -33,7 +33,7 @@ public class CasesController : Controller
     [Authorize]
     [HttpGet("list-cases-by-subject", Name = "listCasesBySubjectOperation")]
     [Produces("text/json", "application/json")]
-    public IEnumerable<Case> ListCasesBySubject(string subjectId) {
+    public IEnumerable<AnnotatedCase> ListCasesBySubject(string subjectId) {
         return Database.ListCasesBySubject(subjectId);
     }
 

@@ -29,14 +29,14 @@ public class Event: INormalizable<Event>
     [BsonElement("actions")]
     public List<Action> Actions { get; set; } = new List<Action>();
 
-    public Event Normalize(INormalizer n) => new Event
+    public TNew Normalize<TNew>(INormalizer n) where TNew : Event, new() => new TNew
     {
         UpdateTime = n.Date(UpdateTime),
         Label = n.String(Label),
         Description = n.String(Description),
         Status = n.String(Status),
         StatusHint = n.Enum<StatusHint>(StatusHint),
-        Actions = n.List<Action>(Actions)
+        Actions = n.List<Action, Action>(Actions)
     };
 }
 

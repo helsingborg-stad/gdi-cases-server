@@ -20,7 +20,7 @@ public class Action: INormalizable<Action>
     [JsonConverter(typeof(StringValuesFromEnumConverter<ActionTypeHint>))]
     public string TypeHint { get; set; } = "";
 
-    public Action Normalize(INormalizer n) => new Action
+    public TNew Normalize<TNew>(INormalizer n) where TNew : Action, new() => new TNew
     {
         Label = n.String(Label),
         Url = n.String(Url),
