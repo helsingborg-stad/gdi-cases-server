@@ -93,8 +93,9 @@ public class MongoDbCasesDatabase : ICasesDatabase
     public void MarkCaseAsRead(string recordId)
     {
         var filter = Builders<MongoDbCaseRecord>.Filter.Where(rec => rec.RecordId == recordId);
-        var set = new BsonDocument("$set",
-            new BsonDocument("lastReadContentHash", new BsonString("$contentHash")));
+        var set = new BsonDocument(
+            "$set", new BsonDocument(
+                "lastReadContentHash", new BsonString("$contentHash")));
         var pipeline = PipelineDefinition<MongoDbCaseRecord, MongoDbCaseRecord>.Create(set);
         Collection.UpdateOne(filter, pipeline);
     }
