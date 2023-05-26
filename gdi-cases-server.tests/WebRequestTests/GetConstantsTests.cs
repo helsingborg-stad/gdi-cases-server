@@ -17,7 +17,7 @@ public class GetConstantsTests : WebserverTestBase
         await WithWebServer(
             async client =>
             {
-                var c = await Request(client, "/api/v1/cases/get-constants")
+                var c = await Request(client, "/api/v1/cases/constants")
                         .WithHeader("Accept", "application/json")
                     .GetAsync()
                     .ReceiveJson<Constants>();

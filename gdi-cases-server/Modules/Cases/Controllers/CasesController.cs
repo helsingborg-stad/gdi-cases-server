@@ -20,7 +20,7 @@ public class CasesController : Controller
 
     public ICasesDatabase Database { get; }
 
-    [HttpGet("get-constants", Name = "getConstantsOperation")]
+    [HttpGet("constants", Name = "getConstantsOperation")]
     public Constants Constants()
     {
         return new Constants()
@@ -31,10 +31,31 @@ public class CasesController : Controller
     }
 
     [Authorize]
+    [Obsolete]
     [HttpGet("list-cases-by-subject", Name = "listCasesBySubjectOperation")]
     [Produces("text/json", "application/json")]
-    public IEnumerable<Case> ListCasesBySubject(string subjectId) {
+    public IEnumerable<AnnotatedCase> ListCasesBySubject(string subjectId) {
         return Database.ListCasesBySubject(subjectId);
+    }
+
+    [Authorize]
+    [HttpGet("list/{subjectId}", Name = "listCasesOperation")]
+    [Produces("text/json", "application/json")]
+    public IEnumerable<AnnotatedCase> ListCasesBySubject2(string subjectId)
+    {
+        return Database.ListCasesBySubject(subjectId);
+    }
+
+    [Authorize]
+    [HttpGet("stats/{subjectId}", Name = "getStatsOperation")]
+    [Produces("text/json", "application/json")]
+    public CasesStats GetStatsBySubject(string subjectId) => Database.GetStatsBySubject(subjectId);
+
+    [Authorize]
+    [HttpPost("stats/mark-as-read/{recordId}", Name = "markAsReadOperation")]
+    public void MarkAsRead(string recordId)
+    {
+        Database.MarkCaseAsRead(recordId);
     }
 
     [Authorize]
@@ -46,7 +67,7 @@ public class CasesController : Controller
         return normalizedBundle;
     }
 
-    [HttpGet("generate-sample-bundle", Name = "generateSampleBundleOperation")]
+    [HttpPost("sample-bundle", Name = "sampleBundleOperation")]
     public Bundle GenerateSampleBundle(string subjectId, int randomSeed = 0)
     {
         return new SampleDataGenerator().GenerateSampleBundle(subjectId, randomSeed);

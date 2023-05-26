@@ -24,7 +24,7 @@ public class ListCasesBySubjectTests : WebserverTestBase
         // Prepare for authorization and a cases response
         var testApiKey = "test-api-key";
         var testSubjectId = "test-api-key";
-        var fakeCases = new List<Case>() { new Case { CaseId = "testCaseId" } };
+        var fakeCases = new List<AnnotatedCase>() { new AnnotatedCase { CaseId = "testCaseId" } };
         var apiKeys = new CasesApiKeys(key => key == testApiKey);
         var databaseMock = new Mock<ICasesDatabase>();
         databaseMock.Setup(db => db

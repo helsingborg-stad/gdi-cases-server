@@ -58,7 +58,7 @@ public class Case: INormalizable<Case>
     [BsonElement("actions")]
     public List<Action> Actions { get; set; } = new List<Action>();
 
-    public Case Normalize(INormalizer n) => new Case
+    public TNew Normalize<TNew>(INormalizer n) where TNew : Case, new() => new TNew
     {
         PublisherId = n.String(PublisherId),
         SystemId = n.String(SystemId),
@@ -71,8 +71,19 @@ public class Case: INormalizable<Case>
         Description = n.String(Description),
         Status = n.String(Status),
         StatusHint = n.Enum<StatusHint>(StatusHint),
-        Events = n.List(Events),
-        Actions = n.List(Actions),
+        Events = n.List<Event, Event>(Events),
+        Actions = n.List<Action, Action>(Actions),
         IsDeleted = IsDeleted
     };
+
+    public IEnumerable<string> EnumerateHashValues()
+    {
+        yield return PublisherId;
+        yield return SystemId;
+        yield return CaseId;
+        yield return SubjectId;
+        yield return Organization;
+        yield return Status;
+        yield return StatusHint;
+    }
 }

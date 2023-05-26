@@ -9,8 +9,8 @@ public class Bundle: INormalizable<Bundle>
     [BsonElement("cases")]
     public List<Case> Cases { get; set; } = new List<Case>();
 
-    public Bundle Normalize(INormalizer n) => new Bundle
+    public TNew Normalize<TNew>(INormalizer n) where TNew : Bundle, new() => new TNew
     {
-        Cases = n.List(Cases)
+        Cases = n.List<Case, Case>(Cases)
     };
 }
