@@ -75,4 +75,15 @@ public class Case: INormalizable<Case>
         Actions = n.List<Action, Action>(Actions),
         IsDeleted = IsDeleted
     };
+
+    public IEnumerable<string> EnumerateHashValues()
+    {
+        yield return PublisherId;
+        yield return SystemId;
+        yield return CaseId;
+        yield return SubjectId;
+        yield return Organization;
+        yield return Status;
+        yield return StatusHint;
+    }
 }

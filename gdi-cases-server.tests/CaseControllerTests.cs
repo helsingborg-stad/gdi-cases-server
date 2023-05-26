@@ -77,5 +77,16 @@ public class CaseControllerTests: NiceToHaveTestBase
         }
 
         public void UpdateCases(Bundle bundle) => OnUpdateCases?.Invoke(bundle);
+
+        public void MarkCaseAsRead(string recordId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CasesStats GetStatsBySubject(string subjectId)
+        {
+            throw new NotImplementedException();
+        }
     }
+
 }

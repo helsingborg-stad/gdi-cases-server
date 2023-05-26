@@ -17,7 +17,10 @@ public class MongoDbCaseRecord
     public DateTime UpdateTime { get; set; } = DateTime.Now;
     [BsonElement("case")]
     public Case? Case { get; set; }
-    [BsonElement("isMarkedAsRead")]
-    public bool IsMarkedAsRead { get; set; }
+
+    [BsonElement("contentHash")]
+    public string? ContentHash { get; set; }
+    [BsonElement("lastReadContentHash")]
+    public string? LastReadContentHash { get; set; }
 }
 

@@ -18,6 +18,9 @@ public class Program
         // Load configuration
         DotEnv.Load();
 
+        // Set some global defaults
+        MongoDbSetup.Configure();
+
         // Setup configuration dependent services
         var apiKeys = CasesApiKeys.TryCreateFromEnv()
             ?? MissingConfiguration<ICasesApiKeys>("API key configuration is missing. Expected atleast API_KEY=... in environment.");

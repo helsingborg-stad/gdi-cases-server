@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace gdi_cases_server.Modules.Cases.MongoDb;
 
@@ -31,6 +32,7 @@ public class MongoDbSession {
         var collection = db.GetCollection<MongoDbCaseRecord>(collectionName);
         collection.Indexes.CreateOne(new CreateIndexModel<MongoDbCaseRecord>(new IndexKeysDefinitionBuilder<MongoDbCaseRecord>().Ascending(record => record.RecordId), new CreateIndexOptions { Unique = true }));
         collection.Indexes.CreateOne(new CreateIndexModel<MongoDbCaseRecord>(new IndexKeysDefinitionBuilder<MongoDbCaseRecord>().Ascending(record => record.SubjectId)));
+        
         return new MongoDbSession(client, db, collection);
     }
 }
